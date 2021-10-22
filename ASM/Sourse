@@ -1,0 +1,5 @@
+PUSH 5
+IN
+DIV
+OUT
+HLT
