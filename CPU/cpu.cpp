@@ -13,16 +13,15 @@ int main(void)
     
     if (header.sign = 'MH')
     {
-        char *code = (char *) calloc(header.code_length + 1, sizeof(char));
-        fread(code, header.code_length, sizeof(char), Code);
+        char *binary_code = (char *) calloc(header.code_length + 1, sizeof(char));
+        fread(binary_code, header.code_length, sizeof(char), Code);
 
-        Stack stk = {};
-        stackCtor(&stk, 0);
+        CREATE_CPU(cpu);
 
-        if (processing(&header, code, &stk) == CMD_HLT)
+        if (processing(&header, binary_code, &cpu) == CMD_HLT)
         {
-            free(code);
-            stackDtor(&stk);
+            free(binary_code);
+            stackDtor(&cpu.stk);
             fclose(Code);
             #if DEBUG_LVL > 0
                 fclose(logs);
