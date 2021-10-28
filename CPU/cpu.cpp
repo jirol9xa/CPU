@@ -17,6 +17,8 @@ int main(void)
         fread(binary_code, header.code_length, sizeof(char), Code);
 
         CREATE_CPU(cpu);
+        cpu.code_size = header.code_length;
+        cpu.real_size = header.real_length;
 
         if (processing(&header, binary_code, &cpu) == CMD_HLT)
         {
